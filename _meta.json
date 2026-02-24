@@ -1,11 +1,16 @@
 {
-  "name": "nexus-brain",
-  "description": "AI-Orchestrated SRE. Connects OpenClaw monitoring with OpenCode reasoning for intelligent self-healing.",
-  "version": "1.0.0",
+  "name": "nexus-orchestrator",
+  "description": "AI-Driven SRE Orchestrator. Connects local diagnostics with AI reasoning for logical self-healing and log analysis.",
+  "version": "1.1.0",
   "author": "mrnsmh",
   "entrypoint": "SKILL.md",
   "requirements": {
-    "binaries": ["docker", "pm2", "/root/.opencode/bin/opencode"],
+    "binaries": ["docker", "pm2", "opencode"],
     "pythonPackages": ["psutil"]
+  },
+  "permissions": {
+    "filesystem": ["read", "write:~/.nexus-safe/"],
+    "network": ["outbound:opencode.ai"],
+    "commands": ["docker", "pm2", "opencode"]
   }
 }

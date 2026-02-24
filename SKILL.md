@@ -1,19 +1,20 @@
-# Skill: Nexus-Brain (V1.0) - AI Orchestrator
+# Skill: Nexus-Orchestrator (V1.1)
 
-Nexus-Brain connects the local SRE monitoring (**Nexus-Safe**) with the advanced reasoning of **OpenCode** (via Codex Iliad).
+Intelligent SRE Bridge for AI-driven system diagnosis and recovery.
 
-## 🧠 Intelligent Workflow
-Instead of simple procedural restarts, Nexus-Brain follows this logic:
-1. **Detection**: `monitor.py` identifies a service failure.
-2. **Analysis**: The Agent extracts the last 100 lines of logs.
-3. **Reasoning**: The Agent calls OpenCode with the logs: `opencode run "Analyze these logs and suggest a fix: [LOGS]"`
-4. **Action**: 
-   - If it's an **infrastructure** issue (DB down), the Agent performs a controlled restart.
-   - If it's a **code** issue, the Agent reports the exact cause and fix proposed by OpenCode/Codex.
+## 🛡️ Security & Privacy Protocols
+- **Log Redaction**: The orchestrator includes a redaction engine that masks passwords, tokens, and emails in logs before sending them to the reasoning service.
+- **Generic Binary Support**: No longer relies on root-home paths. It searches for `opencode` in your system PATH or local user directory.
+- **Privacy Notice**: This skill sends redacted log snippets to your configured AI reasoning service (e.g., OpenCode/Codex). Ensure your AI provider complies with your data policy.
 
-## 🚀 Commands
-- **/nexus-brain check** : Run a full diagnostic using OpenCode for any non-healthy service.
-- **/nexus-brain reason <service>** : Force an AI analysis of a specific service's logs.
+## 📋 Capabilities
+- **Reasoning-First Recovery**: Blocks blind restarts. Analyzes logs to differentiate between code bugs (alert user) and infra failures (restart service).
+- **Log Contextualization**: Automatically fetches and redacts relevant logs for the AI.
 
-## ⚙️ Configuration
-Uses local `opencode` binary and configuration.
+## ⚙️ Logic & Safeguards
+- **Manual Oversight**: Critical actions still require `/approve` if configured in OpenClaw.
+- **Diagnostic Step**: The agent is forced to perform an analysis via `bridge.py` before any recovery action.
+
+## 🚀 Installation
+1. `pip install psutil`
+2. Ensure `docker`, `pm2`, and `opencode` are installed.
